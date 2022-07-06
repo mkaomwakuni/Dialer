@@ -1,3 +1,26 @@
 <resources>
     <string name="app_name">Dialer</string>
+    <string name="call_log">Call Log</string>
+    <string name="Cancel">Cancel</string>
+    <string name="no_number">No Number</string>
+    <string name="phone">Phone</string>
+    <string name="hash">#</string>
+    <string name="make_call">Make Call</string>
+    <string name="send_sms">Send SMS</string>
+    <string name="sms">SMS</string>
+    <string name="block_unblock_number">Block</string>
+    <string name="Redial">Redial</string>
+    <string name="star">*</string>
+    <string name="call_direction">The direction of the call</string>
+    <string name="number_keypad">Number on Keypad</string>
+    <string name="backspace">Backspace</string>
+    <string name="number">Number</string>
+    <string name="message">Message</string>
+    <string name="send">Send</string>
+    <string name="reply">Reply</string>
+    <string name="view_message">View message</string>
+    <string name="error_sender">Could not load message</string>
+    <string name="error_body">Could not load message</string>
+    <string name="error_sending_sms">Check the phone number and message are not empty</string>
+    <string name="new_sms">New message received: %1$s</string>
 </resources>
