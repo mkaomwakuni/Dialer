@@ -26,4 +26,5 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }else ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.CALL_PHONE),0)
     }
+
 }
