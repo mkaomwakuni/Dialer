@@ -23,4 +23,7 @@
     <string name="error_body">Could not load message</string>
     <string name="error_sending_sms">Check the phone number and message are not empty</string>
     <string name="new_sms">New message received: %1$s</string>
+    <string name="call_this_number">Call this number</string>
+    <string name="the_direction_of_the_call">CallBack</string>
+    <string name="call_this_number_back">Redial</string>
 </resources>
