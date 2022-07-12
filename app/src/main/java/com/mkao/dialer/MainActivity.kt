@@ -7,10 +7,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.content.PackageManagerCompat
+import androidx.activity.viewModels
 import java.util.jar.Manifest
 
 class MainActivity : AppCompatActivity() {
+    private val communicationViewModel:CommunicationViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -25,6 +27,16 @@ class MainActivity : AppCompatActivity() {
             intent.data = Uri.parse("tel:$number")
             startActivity(intent)
         }else ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.CALL_PHONE),0)
+    }
+
+    //retrieve the call log
+    fun getCallLogs(){
+        val readStoragePermission = ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)
+        val readCallLogsPermission = ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_CALL_LOG)
+        if (readStoragePermission!=PackageManager.PERMISSION_GRANTED || readCallLogsPermission != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE,android.Manifest.permission.READ_CALL_LOG),READ_STORAGE_REQUEST_CODE)
+            return
+        }
     }
 
 }
