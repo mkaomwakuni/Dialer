@@ -8,6 +8,11 @@ import androidx.fragment.app.Fragment
 import com.mkao.dialer.MainActivity
 import com.mkao.dialer.databinding.FragmentCallLogBinding
 
+
+
+
+
+
 class callFragment:Fragment() {
     private var _binding : FragmentCallLogBinding? = null
     private  lateinit var callingActivity: MainActivity
@@ -18,7 +23,7 @@ class callFragment:Fragment() {
 
     // This property is only valid between onCreateView and
     // onDestroyView.
-    private var binding get() = _binding!!
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,6 +33,7 @@ class callFragment:Fragment() {
         _binding = FragmentCallLogBinding.inflate(inflater,container,false)
         callingActivity = activity as MainActivity
         //call Adapter initialisation
+        callAdapter = CallAdapter((callingActivity))
 
         return  binding.root
     }

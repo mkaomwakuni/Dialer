@@ -6,12 +6,17 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.mkao.dialer.CallLogEvent
 import com.mkao.dialer.MainActivity
 import com.mkao.dialer.R
 
 class CallAdapter(private  val activity: MainActivity): RecyclerView.Adapter<CallAdapter.CallViewHolder>() {
+    var callLog = listOf<CallLogEvent>()
+
     inner class CallViewHolder (itemView: View): RecyclerView.ViewHolder(itemView) {
+
 
         internal  var mDirection = itemView.findViewById<View>(R.id.callDirection) as ImageView
         internal  var mPhoneNumber = itemView.findViewById<View>(R.id.number)
@@ -30,7 +35,10 @@ class CallAdapter(private  val activity: MainActivity): RecyclerView.Adapter<Cal
     }
 
     override fun onBindViewHolder(holder: CallViewHolder, position: Int) {
-        TODO("Not yet implemented")
+       val current = callLog[position]
+        val  callDirection = holder.mDirection
+        callDirection.setColorFilter(ContextCompat.getColor(activity, android.R.color.holo_green_dark))
+        
     }
 
     override fun getItemCount(): Int {

@@ -3,16 +3,17 @@ package com.mkao.dialer
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.CallLog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.activity.viewModels
-import java.util.jar.Manifest
+import androidx.lifecycle.ViewModel
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
-    private val communicationViewModel:CommunicationViewModel by viewModels()
+   private val communicationViewModel : CommunicationViewModel by ViewModel()
 
     companion object{
         //Reference code allows the MainActivity keep track and respond to permission requests
@@ -63,8 +64,19 @@ class MainActivity : AppCompatActivity() {
             val date = it.getColumnIndexOrThrow(CallLog.Calls.DATE)
             while (it.moveToNext()){
                 val phoneNumber = cursor.getString(number)
+                val callType =cursor.getString(type)
+                val callDate = cursor.getLong(date)
+                val callDateString = SimpleDateFormat("dd/MM/yy HH:mm",Locale.getDefault()).format(Date(callDate))
+                val direction = when(callType.toInt()){
+                    CallLog.Calls.OUTGOING_TYPE -> "OUTGOING"
+                    CallLog.Calls.INCOMING_TYPE -> "INCOMING"
+                    CallLog.Calls.MISSED_TYPE -> "MISSED"
+
+                    else -> null }
+                val entry = CallLogEvent(direction,phoneNumber,callDateString)
+                callLog.add(entry)}
+                }
+                   cursor?.close()
+        communicationViewModel.callLog.value = callLog
             }
         }
-    }
-
-}
