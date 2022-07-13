@@ -19,7 +19,7 @@ class CallAdapter(private  val activity: MainActivity): RecyclerView.Adapter<Cal
 
 
         internal  var mDirection = itemView.findViewById<View>(R.id.callDirection) as ImageView
-        internal  var mPhoneNumber = itemView.findViewById<View>(R.id.number)
+        internal  var mPhoneNumber = itemView.findViewById<View>(R.id.number) as TextView
         internal  var mCallDate = itemView.findViewById<View>(R.id.date) as TextView
         internal var mCallBack = itemView.findViewById<View>(R.id.callBack) as ImageButton
         init {
@@ -38,12 +38,22 @@ class CallAdapter(private  val activity: MainActivity): RecyclerView.Adapter<Cal
        val current = callLog[position]
         val  callDirection = holder.mDirection
         callDirection.setColorFilter(ContextCompat.getColor(activity, android.R.color.holo_green_dark))
-        
+        when(current.direction){
+            "OUTGOING" -> callDirection.setImageResource(R.drawable.ic_outgoing)
+            "INCOMING" -> callDirection.setImageResource(R.drawable.ic_incoming)
+            "MISSED" -> {
+                callDirection.setImageResource(R.drawable.ic_missed)
+                callDirection.setColorFilter(ContextCompat.getColor(activity,android.R.color.holo_red_dark))
+            }
+            null -> callDirection.visibility = View.INVISIBLE
+        }
+        holder.mPhoneNumber.text = current.number
+        holder.mCallDate.text = current.date
+        holder.mCallBack.setOnClickListener { 
+            if (current.number.isNotBlank()) activity.callNumber(current.number)
+        }
     }
 
-    override fun getItemCount(): Int {
-        TODO("Not yet implemented")
-    }
-
+    override fun getItemCount() = callLog.size
 
 }

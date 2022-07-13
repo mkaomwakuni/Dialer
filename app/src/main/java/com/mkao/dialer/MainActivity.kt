@@ -8,12 +8,13 @@ import android.provider.CallLog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModel
+import com.mkao.dialer.databinding.ActivityMainBinding
 import java.text.SimpleDateFormat
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
-   private val communicationViewModel : CommunicationViewModel by ViewModel()
+    private val communicationViewModel: CommunicationViewModel by viewModels()
+    private lateinit var binding: ActivityMainBinding
 
     companion object{
         //Reference code allows the MainActivity keep track and respond to permission requests
