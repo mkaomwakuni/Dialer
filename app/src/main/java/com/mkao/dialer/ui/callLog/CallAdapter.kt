@@ -16,15 +16,15 @@ class CallAdapter(private  val activity: MainActivity): RecyclerView.Adapter<Cal
     var callLog = listOf<CallLogEvent>()
 
     inner class CallViewHolder (itemView: View): RecyclerView.ViewHolder(itemView) {
-
-
         internal  var mDirection = itemView.findViewById<View>(R.id.callDirection) as ImageView
         internal  var mPhoneNumber = itemView.findViewById<View>(R.id.number) as TextView
         internal  var mCallDate = itemView.findViewById<View>(R.id.date) as TextView
         internal var mCallBack = itemView.findViewById<View>(R.id.callBack) as ImageButton
         init {
             itemView.setOnLongClickListener {
-
+                val phoneNumber = callLog[adapterPosition].number
+                if (phoneNumber.isNotBlank())
+                    activity.showCallLogPopup(it,phoneNumber)
                 return@setOnLongClickListener true
             }
         }

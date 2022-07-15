@@ -1,5 +1,6 @@
 package com.mkao.dialer.ui.callLog
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,11 +9,9 @@ import androidx.fragment.app.Fragment
 import com.mkao.dialer.CommunicationViewModel
 import com.mkao.dialer.MainActivity
 import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.mkao.dialer.databinding.FragmentCallLogBinding
-
-
-
-
+import kotlin.math.log
 
 
 class callFragment:Fragment() {
@@ -40,5 +39,17 @@ class callFragment:Fragment() {
         callAdapter = CallAdapter((callingActivity))
 
         return  binding.root
+    }
+    @SuppressLint("NotifyDataSetChanged")
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.root.layoutManager = LinearLayoutManager(activity)
+        callingActivity.getCallLogs()
+        CommunicationViewModel.callLog.observe (viewLifecycleOwner { log ->
+            log?.let {
+                callAdapter.callLog = it.take(10)
+                callAdapter.notifyDataSetChanged()
+            }
+        }
     }
 }

@@ -1,5 +1,6 @@
 package com.mkao.dialer
 
+import android.app.Dialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -95,6 +96,10 @@ class MainActivity : AppCompatActivity() {
                         true } else -> super.onOptionsItemSelected(it)
                 }
             }
-            show() }
+            show()
+        }
     }
+
+    fun openDialog(dialog: Dialog) = dialog.show(supportFragmentManager, "")
+
 }
