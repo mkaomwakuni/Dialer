@@ -5,6 +5,8 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.CallLog
+import android.view.View
+import android.widget.PopupMenu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -80,4 +82,19 @@ class MainActivity : AppCompatActivity() {
                    cursor?.close()
         communicationViewModel.callLog.value = callLog
             }
-        }
+    fun showCallLogPopup (view: View, phoneNumber: String){
+        PopupMenu(this,view).apply {
+            inflate(R.menu.call_log)
+            setOnMenuItemClickListener {
+                when (it.itemId){
+                    R.id.make_call-> {
+                        callNumber(phoneNumber)
+                        true }
+                    R.id.send_sms -> {
+                        openDialog(SendSMS(phoneNumber))
+                        true } else -> super.onOptionsItemSelected(it)
+                }
+            }
+            show() }
+    }
+}

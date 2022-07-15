@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.mkao.dialer.CommunicationViewModel
 import com.mkao.dialer.MainActivity
+import androidx.fragment.app.activityViewModels
 import com.mkao.dialer.databinding.FragmentCallLogBinding
 
 
@@ -14,6 +16,8 @@ import com.mkao.dialer.databinding.FragmentCallLogBinding
 
 
 class callFragment:Fragment() {
+    private val communicationViewModel: CommunicationViewModel by activityViewModels()
+
     private var _binding : FragmentCallLogBinding? = null
     private  lateinit var callingActivity: MainActivity
     private lateinit var callAdapter: CallAdapter
