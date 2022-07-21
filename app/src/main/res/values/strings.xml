@@ -26,4 +26,5 @@
     <string name="call_this_number">Call this number</string>
     <string name="the_direction_of_the_call">CallBack</string>
     <string name="call_this_number_back">Redial</string>
+    <string name="floatingbtn">Floating Button</string>
 </resources>
